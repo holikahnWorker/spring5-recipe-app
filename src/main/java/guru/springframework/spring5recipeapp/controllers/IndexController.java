@@ -9,6 +9,7 @@ public class IndexController {
 
     @RequestMapping({"","/","/index","/index.html"})
     public String getIndexPage(){
+        System.out.println("Bad friend");
         return "index";
     }
 }
