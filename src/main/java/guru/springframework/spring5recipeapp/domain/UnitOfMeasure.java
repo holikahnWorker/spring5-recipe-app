@@ -13,6 +13,9 @@ public class UnitOfMeasure {
     private Long id;
     private String uom;
 
+    public UnitOfMeasure() {
+    }
+
     public Long getId() {
         return id;
     }

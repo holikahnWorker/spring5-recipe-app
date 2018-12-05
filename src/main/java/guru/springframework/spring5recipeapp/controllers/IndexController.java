@@ -3,8 +3,11 @@ package guru.springframework.spring5recipeapp.controllers;
 import guru.springframework.spring5recipeapp.domain.*;
 import guru.springframework.spring5recipeapp.repositories.CategoryRepository;
 import guru.springframework.spring5recipeapp.repositories.UnitOfMeasureRepository;
+import guru.springframework.spring5recipeapp.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -14,11 +17,12 @@ public class IndexController {
 
     private CategoryRepository categoryRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
+    private RecipeService recipeService;
 
-    @Autowired
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"","/","/index","/index.html"})
@@ -31,5 +35,11 @@ public class IndexController {
         System.out.println("Uom Id is : " + uomOptional.get().getId());
 
         return "index";
+    }
+
+    @RequestMapping({"/allRecipes"})
+    public String getRecipes(Model model){
+        model.addAttribute("recipesList", this.recipeService.getAllRecipes());
+        return "recipes";
     }
 }
