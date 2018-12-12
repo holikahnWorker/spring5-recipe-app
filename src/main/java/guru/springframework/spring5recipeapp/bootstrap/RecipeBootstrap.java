@@ -63,7 +63,7 @@ public class RecipeBootstrap implements CommandLineRunner {
         recipeTwo.getIngredients().add(new Ingredient("Scotch", new BigDecimal(4), uomCup, recipeTwo));
         recipeTwo.getIngredients().add(new Ingredient("Chili", new BigDecimal(6), uomTablepoon, recipeTwo));
         Notes notesTwo = new Notes();
-        notesTwo.setRecipe(recipeOne);
+        notesTwo.setRecipe(recipeTwo);
         notesTwo.setRecipeNotes("You will be drunk");
         recipeTwo.setNotes(notesTwo);
 
