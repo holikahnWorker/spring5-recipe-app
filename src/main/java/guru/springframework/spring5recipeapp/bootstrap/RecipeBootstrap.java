@@ -46,9 +46,9 @@ public class RecipeBootstrap implements CommandLineRunner {
         recipeOne.setPrepTime(10);
         recipeOne.setDifficulty(Difficulty.HARD);
         recipeOne.setDescription("Perfect Guacamole");
-        recipeOne.getIngredient().add(new Ingredient("Oil", new BigDecimal(1), uomCup, recipeOne));
-        recipeOne.getIngredient().add(new Ingredient("Pepper", new BigDecimal(3), uomTeaspoon, recipeOne));
-        recipeOne.getIngredient().add(new Ingredient("Macaroni", new BigDecimal(2), uomCup, recipeOne));
+        recipeOne.getIngredients().add(new Ingredient("Oil", new BigDecimal(1), uomCup, recipeOne));
+        recipeOne.getIngredients().add(new Ingredient("Pepper", new BigDecimal(3), uomTeaspoon, recipeOne));
+        recipeOne.getIngredients().add(new Ingredient("Macaroni", new BigDecimal(2), uomCup, recipeOne));
         Notes notesOne = new Notes();
         notesOne.setRecipe(recipeOne);
         notesOne.setRecipeNotes("You have to eat this dish");
@@ -59,19 +59,19 @@ public class RecipeBootstrap implements CommandLineRunner {
         recipeTwo.setPrepTime(10);
         recipeTwo.setDifficulty(Difficulty.HARD);
         recipeTwo.setDescription("Spicy Grilled Chicken");
-        recipeTwo.getIngredient().add(new Ingredient("Bread", new BigDecimal(1), uomOunce, recipeTwo));
-        recipeTwo.getIngredient().add(new Ingredient("Scotch", new BigDecimal(4), uomCup, recipeTwo));
-        recipeTwo.getIngredient().add(new Ingredient("Chili", new BigDecimal(6), uomTablepoon, recipeTwo));
+        recipeTwo.getIngredients().add(new Ingredient("Bread", new BigDecimal(1), uomOunce, recipeTwo));
+        recipeTwo.getIngredients().add(new Ingredient("Scotch", new BigDecimal(4), uomCup, recipeTwo));
+        recipeTwo.getIngredients().add(new Ingredient("Chili", new BigDecimal(6), uomTablepoon, recipeTwo));
         Notes notesTwo = new Notes();
         notesTwo.setRecipe(recipeOne);
         notesTwo.setRecipeNotes("You will be drunk");
         recipeTwo.setNotes(notesTwo);
 
 
-        recipeOne.getCategories().add(americanCategory);
-        recipeOne.getCategories().add(italianCategory);
+        recipeOne.addCategory(americanCategory);
+        recipeOne.addCategory(italianCategory);
 
-        recipeTwo.getCategories().add(mexicanCategory);
+        recipeTwo.addCategory(mexicanCategory);
 
 
         List<Recipe> recipes = new ArrayList<>();

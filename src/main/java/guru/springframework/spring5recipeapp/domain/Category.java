@@ -1,5 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,11 +13,8 @@ public class Category {
     private Long id;
     private String description;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories" , fetch = FetchType.EAGER)
     private Set<Recipe> recipes = new HashSet<>();
-
-    public Category() {
-    }
 
     public Long getId() {
         return id;
