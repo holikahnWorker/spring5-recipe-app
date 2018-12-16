@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -24,4 +25,17 @@ public class RecipeServiceImpl implements RecipeService{
         log.debug("You're in RecipeServiceImpl");
         return (List) this.recipeRepository.findAll();
     }
+
+
+    @Override
+    public Recipe getById(Long id) throws Exception{
+
+        Optional<Recipe> recipe = this.recipeRepository.findById(id);
+
+        if(!recipe.isPresent()){
+            throw new RuntimeException("Recipe not found");
+        }
+        return recipe.get();
+    }
+
 }
