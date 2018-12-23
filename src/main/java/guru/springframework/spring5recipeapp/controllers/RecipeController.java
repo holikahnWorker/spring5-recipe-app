@@ -4,6 +4,7 @@ import guru.springframework.spring5recipeapp.commands.RecipeCommand;
 import guru.springframework.spring5recipeapp.repositories.CategoryRepository;
 import guru.springframework.spring5recipeapp.repositories.UnitOfMeasureRepository;
 import guru.springframework.spring5recipeapp.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -42,6 +44,13 @@ public class RecipeController {
         command = this.recipeService.getRecipeCommandbyRecipeId(new Long(id));
         model.addAttribute("recipe", command);
         return "recipeForm";
+    }
+
+    @RequestMapping({"/recipe/delete/{id}"})
+    public String deleteRecipe(@PathVariable String id){
+        this.recipeService.deleteByID(new Long(id));
+        log.debug("Deleted Recipe : "+id);
+        return "redirect:/allRecipes";
     }
 
     @PostMapping
