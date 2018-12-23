@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -54,5 +55,11 @@ public class RecipeServiceImpl implements RecipeService{
         log.debug("Saved Recipe : " + recipe.getId());
         return this.recipeToRecipeCommand.convert(recipe);
     };
+
+    @Override
+    public RecipeCommand getRecipeCommandbyRecipeId(Long id) throws Exception {
+        Recipe recipe = getById(id);
+        return this.recipeToRecipeCommand.convert(recipe);
+    }
 
 }

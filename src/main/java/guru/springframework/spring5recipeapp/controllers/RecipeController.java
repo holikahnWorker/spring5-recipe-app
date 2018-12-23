@@ -36,6 +36,14 @@ public class RecipeController {
         return "recipeForm";
     }
 
+    @RequestMapping({"/recipe/update/{id}"})
+    public String updateRecipe(Model model, @PathVariable String id) throws Exception{
+        RecipeCommand command = new RecipeCommand();
+        command = this.recipeService.getRecipeCommandbyRecipeId(new Long(id));
+        model.addAttribute("recipe", command);
+        return "recipeForm";
+    }
+
     @PostMapping
     @RequestMapping({"recipex"})
     public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand){
