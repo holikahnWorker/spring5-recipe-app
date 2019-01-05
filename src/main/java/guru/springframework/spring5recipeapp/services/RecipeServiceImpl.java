@@ -1,5 +1,6 @@
 package guru.springframework.spring5recipeapp.services;
 
+import guru.springframework.spring5recipeapp.commands.IngredientCommand;
 import guru.springframework.spring5recipeapp.commands.RecipeCommand;
 import guru.springframework.spring5recipeapp.converters.RecipeCommandToRecipe;
 import guru.springframework.spring5recipeapp.converters.RecipeToRecipeCommand;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 @Slf4j
@@ -65,6 +67,13 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public void deleteByID(Long id){
         this.recipeRepository.deleteById(id);
+    }
+
+    @Override
+    public Set<IngredientCommand> getIngredientsByRecipeId(Long id){
+        Recipe recipe = this.recipeRepository.findById(id).get();
+        RecipeCommand recipeCommand = this.recipeToRecipeCommand.convert(recipe);
+        return recipeCommand.getIngredients();
     }
 
 }

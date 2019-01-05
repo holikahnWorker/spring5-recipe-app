@@ -7,10 +7,7 @@ import guru.springframework.spring5recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -26,18 +23,21 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping
     @RequestMapping({"/recipe/show/{id}"})
     public String getRecipeById(Model model, @PathVariable String id) throws Exception{
         model.addAttribute("recipe", this.recipeService.getById(new Long(id)));
         return "recipeView";
     }
 
+    @GetMapping
     @RequestMapping({"/recipe/new"})
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
         return "recipeForm";
     }
 
+    @GetMapping
     @RequestMapping({"/recipe/update/{id}"})
     public String updateRecipe(Model model, @PathVariable String id) throws Exception{
         RecipeCommand command = new RecipeCommand();
@@ -46,6 +46,7 @@ public class RecipeController {
         return "recipeForm";
     }
 
+    @GetMapping
     @RequestMapping({"/recipe/delete/{id}"})
     public String deleteRecipe(@PathVariable String id){
         this.recipeService.deleteByID(new Long(id));

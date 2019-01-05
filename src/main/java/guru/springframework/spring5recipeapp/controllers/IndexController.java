@@ -25,7 +25,7 @@ public class IndexController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"","/","/index","/index.html"})
+    /*@RequestMapping({"","/","/index","/index.html"})
     public String getIndexPage(){
 
         Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
@@ -35,9 +35,9 @@ public class IndexController {
         System.out.println("Uom Id is : " + uomOptional.get().getId());
 
         return "index";
-    }
+    }*/
 
-    @RequestMapping({"/allRecipes"})
+    @RequestMapping({"/allRecipes","","/","/index","/index.html"    })
     public String getRecipes(Model model){
         model.addAttribute("recipesList", this.recipeService.getAllRecipes());
         return "recipes";
