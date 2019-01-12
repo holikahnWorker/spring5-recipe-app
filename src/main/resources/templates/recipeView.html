@@ -21,19 +21,36 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="pannel-group">
                 <div class="panel panel-primary">
+
                     <div class="panel-heading">
-                        <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                        <div class="row">
+                            <div class="col-md-11 ">
+                                <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                            </div>
+
+                        </div>
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <ul th:each="cat : ${recipe.categories}">
                                     <li th:text="${cat.description}">cat one</li>
                                 </ul>
                             </div>
+
+                            <div class = "col-md-6">
+                                <a class="btn btn-default" th:href="@{'/recipe/' + ${recipe.id} + '/image/upload'}" role="button">Upload image</a>
+                                <div class="col-md-6">
+                                    <img src="../satic/images/Guacamole.png"
+                                         th:src="@{'/recipe/' + ${recipe.id} + '/image/get'}"
+                                         width="200" height="200">
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-3">
