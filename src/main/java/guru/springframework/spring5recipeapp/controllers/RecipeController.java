@@ -10,8 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -33,7 +36,7 @@ public class RecipeController {
             model.addAttribute("recipe", this.recipeService.getById(new Long(id)));
         }
         catch (NumberFormatException nfe){
-            throw new InvalidRecipeIdException("Invalid recipe Id : " + id);
+            throw nfe;
         }
 
         return "recipeView";
@@ -61,7 +64,13 @@ public class RecipeController {
     }
 
     @PostMapping({"recipex"})
-    public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand){
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return "recipeForm";
+        }
+
         RecipeCommand savedRecipeCommand = this.recipeService.saveRecipeCommand(recipeCommand);
         return "redirect:/recipe/show/" + savedRecipeCommand.getId();
     }
@@ -79,16 +88,4 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(InvalidRecipeIdException.class)
-    public ModelAndView handleInvalidRecipeIdException(Exception exception){
-        log.error("handling Invalid RecipeId exception");
-        log.error(exception.getMessage());
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("404Error");
-        modelAndView.addObject("exception", exception);
-
-        return modelAndView;
-    }
 }

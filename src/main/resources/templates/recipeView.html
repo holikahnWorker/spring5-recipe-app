@@ -45,7 +45,7 @@
                             <div class = "col-md-6">
                                 <a class="btn btn-default" th:href="@{'/recipe/' + ${recipe.id} + '/image/upload'}" role="button">Upload image</a>
                                 <div class="col-md-6">
-                                    <img src="../satic/images/Guacamole.png"
+                                    <img th:if="${recipe.image != null}" src="../satic/images/Guacamole.png"
                                          th:src="@{'/recipe/' + ${recipe.id} + '/image/get'}"
                                          width="200" height="200">
                                 </div>

@@ -1,19 +1,40 @@
 package guru.springframework.spring5recipeapp.commands;
 
 import guru.springframework.spring5recipeapp.domain.Difficulty;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RecipeCommand {
 
     private Long id;
+
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String description;
+
+    @Min(1)
+    @Max(999)
     private Integer prepTime;
+
+    @Min(1)
+    @Max(999)
     private Integer cookTime;
+
+    @Min(1)
+    @Max(100)
     private Integer serving;
     private String source;
+
+    @URL
     private String url;
+
+    @NotBlank
     private String directions;
     private Difficulty difficulty;
     private Byte[] image;
